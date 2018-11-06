@@ -1,84 +1,47 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { Component } from 'react';
-import './bootstrap.css';
 import './index.css';
 import AudioPlayer from './AudioPlayer';
-import ChannelInfo from './ChannelInfo';
-import TrackList from './TrackList';
+import MediaInfo from './MediaInfo';
+import MediaList from './MediaList';
 
 class RadioPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentChannelIndex: 0,
+      showList: false,
     };
 
-    this.handleNextChannel = this.handleNextChannel.bind(this);
-    this.handlePrevChannel = this.handlePrevChannel.bind(this);
     this.selectChannel = this.selectChannel.bind(this);
-    this.handlePlayButton = this.handlePlayButton.bind(this);
+    this.handleShowListBtn = this.handleShowListBtn.bind(this);
   }
 
   selectChannel(index) {
     this.setState({ currentChannelIndex: index });
   }
 
-  handlePrevChannel() {
+  handleShowListBtn() {
     this.setState((prevState) => ({
-      currentChannelIndex:
-        prevState.currentChannelIndex === 0 ? 0 : prevState.currentChannelIndex - 1,
-    }));
-  }
-
-  handleNextChannel() {
-    this.setState((prevState) => ({
-      currentChannelIndex:
-        prevState.currentChannelIndex === this.props.listChannels.length - 1
-          ? this.props.listChannels.length - 1
-          : prevState.currentChannelIndex + 1,
-    }));
-  }
-
-  handlePlayButton() {
-    if (this.state.isPlaying) {
-      this.audioPlayer.pause();
-    } else {
-      this.audioPlayer.play();
-    }
-    this.setState((prevState) => ({
-      isPlaying: !prevState.isPlaying,
+      showList: !prevState.showList,
     }));
   }
 
   render() {
-    const { listChannels, config } = this.props;
-    let tmpConfig = config;
-    if (!tmpConfig) {
-      tmpConfig = {};
-    }
-    const { simpleVersion, showChannelNameOnTitle } = tmpConfig;
+    const { listChannels } = this.props;
     const currentChannel = listChannels[this.state.currentChannelIndex];
-    if (showChannelNameOnTitle) {
-      document.title = `Radio Station - ${currentChannel.name}`;
-    }
+    document.title = `Radio Station - ${currentChannel.name}`;
     return (
-      <div>
-        <AudioPlayer
-          channel={currentChannel}
-          handleNextChannel={this.handleNextChannel}
-          handlePrevChannel={this.handlePrevChannel}
-        />
-        {simpleVersion
-        && (
-          <div>
-            <ChannelInfo channel={currentChannel} />
-            <TrackList
+      <div className="RadioPlayer">
+        <div className="player-bar">
+          <AudioPlayer channel={currentChannel} />
+          <button className="show-list-btn" onClick={this.handleShowListBtn}>{this.state.showList ? 'Back' : 'Switch Channel'}</button>
+        </div>
+        {this.state.showList ? (<MediaList
               listChannels={listChannels}
               channel={currentChannel}
               selectChannel={this.selectChannel}
-            />
-          </div>
-        )}
+            />) : (<MediaInfo channel={currentChannel} />)}
       </div>
     );
   }

@@ -1,13 +1,15 @@
 {
-  "main.css": "./static/css/main.61ee7ce6.chunk.css",
-  "main.js": "./static/js/main.2cb422ff.chunk.js",
-  "main.js.map": "./static/js/main.2cb422ff.chunk.js.map",
-  "static/js/1.a93cec8a.chunk.js": "./static/js/1.a93cec8a.chunk.js",
-  "static/js/1.a93cec8a.chunk.js.map": "./static/js/1.a93cec8a.chunk.js.map",
+  "main.css": "./static/css/main.b4e532a5.chunk.css",
+  "main.js": "./static/js/main.6c4fef6c.chunk.js",
+  "main.js.map": "./static/js/main.6c4fef6c.chunk.js.map",
+  "static/js/1.24da687b.chunk.js": "./static/js/1.24da687b.chunk.js",
+  "static/js/1.24da687b.chunk.js.map": "./static/js/1.24da687b.chunk.js.map",
   "runtime~main.js": "./static/js/runtime~main.4a686d48.js",
   "runtime~main.js.map": "./static/js/runtime~main.4a686d48.js.map",
-  "static/css/main.61ee7ce6.chunk.css.map": "./static/css/main.61ee7ce6.chunk.css.map",
+  "static/media/play-btn.svg": "./static/media/play-btn.4e85f443.svg",
+  "static/media/pause-btn.svg": "./static/media/pause-btn.0403903f.svg",
+  "static/css/main.b4e532a5.chunk.css.map": "./static/css/main.b4e532a5.chunk.css.map",
   "index.html": "./index.html",
-  "precache-manifest.4f8a3f59c5bc61e91cbb93b3dd75db93.js": "./precache-manifest.4f8a3f59c5bc61e91cbb93b3dd75db93.js",
+  "precache-manifest.aa50016f7e3dfb9c3e416cd8f92b72bb.js": "./precache-manifest.aa50016f7e3dfb9c3e416cd8f92b72bb.js",
   "service-worker.js": "./service-worker.js"
 }
