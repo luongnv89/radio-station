@@ -18,7 +18,7 @@ class RadioPlayer extends Component {
   }
 
   selectChannel(index) {
-    this.setState({ currentChannelIndex: index });
+    this.setState({ currentChannelIndex: index, showList: false });
   }
 
   handleShowListBtn() {
