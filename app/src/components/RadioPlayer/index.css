@@ -1,29 +1,29 @@
 /* Media Queries*/
 /* For mobile phones: */
 .row::after {
-    content: "";
-    clear: both;
-    display: table;
+  content: "";
+  clear: both;
+  display: table;
 }
 [class*="col-"] {
-    float: left;
-    padding: 15px;
+  float: left;
+  padding: 15px;
 }
 
 @media only screen and (min-width: 768px) {
-    /* For desktop: */
-    .col-1 {width: 8.33%;}
-    .col-2 {width: 16.66%;}
-    .col-3 {width: 25%;}
-    .col-4 {width: 33.33%;}
-    .col-5 {width: 41.66%;}
-    .col-6 {width: 50%;}
-    .col-7 {width: 58.33%;}
-    .col-8 {width: 66.66%;}
-    .col-9 {width: 75%;}
-    .col-10 {width: 83.33%;}
-    .col-11 {width: 91.66%;}
-    .col-12 {width: 100%;}
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
 }
 
 /* Audio Player */
@@ -41,16 +41,27 @@
   box-shadow: 0px 0px 10px 2px red;
 }
 
-.audio-player-btn.active{
+.audio-player-btn.playing{
   border: 1px solid green;
   box-shadow: 0px 0px 10px 2px green;
-  animation: wave 1s linear infinite;
-  -webkit-animation: wave 1s linear infinite;
+  animation: playingwave 1s linear infinite;
+  -webkit-animation: playingwave 1s linear infinite;
 }
 
-@-moz-keyframes wave { 100% { box-shadow: 0px 0px 15px 8px rgba(251, 255, 15, 0.856);}}
-@-webkit-keyframes wave { 100% { box-shadow: 0px 0px 15px 8px rgba(251, 255, 15, 0.856);}}
-@keyframes wave { 100% { box-shadow: 0px 0px 15px 8px rgba(251, 255, 15, 0.856);}}
+@-moz-keyframes playingwave { 100% { box-shadow: 0px 0px 15px 8px green;}}
+@-webkit-keyframes playingwave { 100% { box-shadow: 0px 0px 15px 8px green;}}
+@keyframes playingwave { 100% { box-shadow: 0px 0px 15px 8px green;}}
+
+.audio-player-btn.loading{
+  border: 1px solid rgb(248, 244, 0);
+  box-shadow: 0px 0px 10px 2px rgb(248, 244, 0);
+  animation: loadingwave 1s linear infinite;
+  -webkit-animation: loadingwave 1s linear infinite;
+}
+
+@-moz-keyframes loadingwave { 100% { box-shadow: 0px 0px 15px 8px rgba(251, 255, 15, 0.856); -moz-transform: rotate(360deg)}}
+@-webkit-keyframes loadingwave { 100% { box-shadow: 0px 0px 15px 8px rgba(251, 255, 15, 0.856); -webkit-transform: rotate(360deg)}}
+@keyframes loadingwave { 100% { box-shadow: 0px 0px 15px 8px rgba(251, 255, 15, 0.856); -webkit-transform: rotate(360deg); transform: rotate(360deg)}}
 
 .audio-player-btn:hover {
   border: 1px solid lightgray;
@@ -58,9 +69,8 @@
 
 /* Media Info */
 .media-info {
-  display: table;
-  clear: both;
-  margin: 30px;
+  margin: 10px;
+  width: 80%;
 }
 
 .media-body {
@@ -76,7 +86,6 @@
 
 /* List Media*/
 .ap-media-list {
-  overflow-y: scroll;
   margin: 30px;
 }
 
