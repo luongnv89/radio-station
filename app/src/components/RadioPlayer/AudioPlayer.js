@@ -29,9 +29,11 @@ class AudioPlayer extends Component {
     const { isPlaying } = this.state;
     const btnIcon = isPlaying ? PauseButtonIcon : PlayButtonIcon;
     const btnPlayClassName = isPlaying ? 'audio-player-btn active' : 'audio-player-btn';
+
+    // TODO: handle audio player events by adding onEvent={this.onEvent}
     return (
       <div className="audio-player">
-        <audio src={channel.url[0]} controls ref={input => { this.audioPlayer = input; }} autoPlay hidden />
+        <audio src={channel.url[0]} controls ref={input => { this.audioPlayer = input; }} autoPlay hidden/>
         <img className={btnPlayClassName} src={btnIcon} onClick={this.handlePlayButton} alt="Click to play/pause the audio"/>
       </div>
     );
