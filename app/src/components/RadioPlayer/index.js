@@ -28,11 +28,18 @@ class RadioPlayer extends Component {
   }
 
   render() {
-    const { listChannels } = this.props;
+    const { listChannels, theme } = this.props;
+    let apTheme = theme ? theme : 'dark';
+    let oldBodyClassName = document.body.getAttribute('class') ? document.body.getAttribute('class') : '';
+    if (oldBodyClassName.indexOf(apTheme) === -1) {
+      oldBodyClassName = oldBodyClassName.replace(' dark','').replace(' light','');
+      const newBodyClassName = oldBodyClassName + ' ' + apTheme;
+      document.body.setAttribute('class', newBodyClassName);
+    }
     const currentChannel = listChannels[this.state.currentChannelIndex];
     document.title = `Radio Station - ${currentChannel.name}`;
     return (
-      <div className="RadioPlayer">
+      <div className={`RadioPlayer ${apTheme}`}>
         <div className="player-bar">
           <AudioPlayer channel={currentChannel} />
           <button className="show-list-btn" onClick={this.handleShowListBtn}>{this.state.showList ? 'Back' : 'Switch Channel'}</button>
