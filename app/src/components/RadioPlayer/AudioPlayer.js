@@ -31,6 +31,13 @@ class AudioPlayer extends Component {
     this.setState({
       playerStatus: 'loading',
     });
+    setTimeout(() => {
+      if (this.state.playerStatus === 'loading') {
+        this.setState({
+          playerStatus: 'paused',
+        });
+      }
+    }, 5000);
   }
 
   componentWillReceiveProps(newProps) {
