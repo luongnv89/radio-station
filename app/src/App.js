@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import RadioPlayer from './components/RadioPlayer/index';
 const listAudioChannels = require('./listAudioChannels');
+const { getHashValue, setHashValue } = require('./utils');
 
 class App extends Component {
   constructor(props) {
@@ -10,6 +11,11 @@ class App extends Component {
       theme: 'dark',
     };
     this.switchTheme = this.switchTheme.bind(this);
+    this.switchChannel = this.switchChannel.bind(this);
+  }
+
+  switchChannel (channelIndex) {
+    setHashValue(listAudioChannels[channelIndex].name);
   }
 
   switchTheme() {
@@ -23,6 +29,18 @@ class App extends Component {
       showChannelNameOnTitle : true,
       simpleVersion : true,
     };
+    let defaultChannelIndex = 0;
+    const channelName = getHashValue();
+    if (channelName) {
+      for (let index = 0; index < listAudioChannels.length; index++) {
+        const ch = listAudioChannels[index];
+        if (ch.name === channelName){
+          defaultChannelIndex = index;
+          break;
+        }
+      }
+    }
+
     return (
       <div className="container">
         <div className="header">
@@ -32,6 +50,8 @@ class App extends Component {
           listChannels={listAudioChannels}
           config={audioPlayerConfig}
           theme={this.state.theme}
+          defaultChannelIndex={defaultChannelIndex}
+          switchChannel={this.switchChannel}
         />
       </div>
     );

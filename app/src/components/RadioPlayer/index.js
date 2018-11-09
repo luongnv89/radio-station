@@ -9,7 +9,7 @@ class RadioPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentChannelIndex: 0,
+      currentChannelIndex: props.defaultChannelIndex,
       showList: false,
     };
 
@@ -19,6 +19,7 @@ class RadioPlayer extends Component {
 
   selectChannel(index) {
     this.setState({ currentChannelIndex: index, showList: false });
+    if (this.props.switchChannel) this.props.switchChannel(index);
   }
 
   handleShowListBtn() {
