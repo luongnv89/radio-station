@@ -1,16 +1,6 @@
 [
     {
         "url": [
-            "http://live02.rfi.fr/rfimonde-64.mp3"
-        ],
-        "logo": "http://static.radio.fr/images/broadcasts/b4/4a/2955/c175.png",
-        "name": "RFI",
-        "language": 0,
-        "category": 1,
-        "desc": "Suivez toute information politique, culturelle, sportive en direct et en continu sur RFI"
-    },
-    {
-        "url": [
             "http://roo8ohho.cdn.dvmr.fr/live/franceinfo-midfi.mp3"
         ],
         "logo": "http://static.radio.fr/images/broadcasts/3b/24/4232/1/c175.png",
@@ -21,9 +11,19 @@
     },
     {
         "url": [
+            "http://live02.rfi.fr/rfimonde-64.mp3"
+        ],
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/d/dd/RFI_logo_2013.svg",
+        "name": "RFI",
+        "language": 0,
+        "category": 1,
+        "desc": "Suivez toute information politique, culturelle, sportive en direct et en continu sur RFI"
+    },
+    {
+        "url": [
             "http://185.52.127.173/fr/30401/mp3_128.mp3?origine=radio.net"
         ],
-        "logo": "http://static.radio.fr/images/broadcasts/4e/fb/5558/2/c175.png",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c4/France_Musique_logo.png",
         "name": "Rire & chansons",
         "language": 0,
         "category": 1,
