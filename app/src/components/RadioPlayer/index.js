@@ -4,11 +4,15 @@ import "./index.css";
 import AudioPlayer from "./AudioPlayer";
 import MediaInfo from "./MediaInfo";
 import MediaList from "./MediaList";
-const { setHashValue } = require('../../utils');
+import Timer from './Timer';
+const { setHashValue } = require("../../utils");
 
 const RadioPlayer = props => {
   const [showList, setShowList] = useState(false);
   const [currentChannelIndex, setCurrentChannelIndex] = useState(0);
+  const [sleepingTime, setSleepingTime] = useState(0);
+  const [pausedTime, setPausedTime] = useState(0);
+
   const { listChannels, theme } = props;
   let apTheme = theme ? theme : "dark";
   let oldBodyClassName = document.body.getAttribute("class")
@@ -25,6 +29,8 @@ const RadioPlayer = props => {
   document.title = `Radio Station - ${currentChannel.name}`;
   setHashValue(currentChannel.name);
 
+  const sleepingTimeElRef = React.createRef();
+
   useEffect(() => {
     setCurrentChannelIndex(props.defaultChannelIndex);
   }, [props.defaultChannelIndex]);
@@ -39,12 +45,22 @@ const RadioPlayer = props => {
   };
   const handlePlayerError = () => {
     console.error(`Cannot play the channel: ${currentChannel.name}`);
-    console.log('Going to try the next channel');
+    console.log("Going to try the next channel");
     setCurrentChannelIndex(currentChannelIndex + 1);
     // if (props.switchChannel) props.switchChannel(currentChannelIndex + 1);
-  }
+  };
 
-  console.log('Going to play current channel: ', currentChannel.name);
+  const handleSetSleepingTime = () => {
+    const time = +sleepingTimeElRef.current.value;
+    if (time <= 0 || time > 120) {
+      alert("Invalid input. The sleeping time should be between 1 and 120");
+    } else {
+      setSleepingTime(time);
+      setPausedTime(Date.now() + time * 60 * 1000);
+    }
+  };
+
+  console.log("Going to play current channel: ", currentChannel.name);
 
   return (
     <div className={`RadioPlayer ${apTheme}`}>
@@ -52,12 +68,28 @@ const RadioPlayer = props => {
         <AudioPlayer
           channel={currentChannel}
           handlePlayerError={handlePlayerError}
+          sleepingTime={sleepingTime}
         />
+        {sleepingTime ? (
+          <Timer pausedTime={pausedTime}/>
+        ) : (
+          <div className="form-control">
+            <input
+              type="number"
+              ref={sleepingTimeElRef}
+              placeholder="Number of minutes"
+            />
+            <button className="btn" onClick={handleSetSleepingTime}>
+              Set
+            </button>
+          </div>
+        )}
+
         <button className="show-list-btn" onClick={handleShowListBtn}>
           {showList ? "Back" : "Switch Channel"}
         </button>
       </div>
-      <input type="number" className="" placeholder="Number of minutes"/>
+
       {showList ? (
         <MediaList
           listChannels={listChannels}
@@ -65,7 +97,7 @@ const RadioPlayer = props => {
           selectChannel={selectChannel}
         />
       ) : (
-        <MediaInfo channel={currentChannel}/>
+        <MediaInfo channel={currentChannel} />
       )}
     </div>
   );
