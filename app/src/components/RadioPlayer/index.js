@@ -57,7 +57,7 @@ const RadioPlayer = props => {
           {showList ? "Back" : "Switch Channel"}
         </button>
       </div>
-
+      <input type="number" className="" placeholder="Number of minutes"/>
       {showList ? (
         <MediaList
           listChannels={listChannels}

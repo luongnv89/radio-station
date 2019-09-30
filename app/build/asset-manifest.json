@@ -1,17 +1,19 @@
 {
-  "main.css": "./static/css/main.371e7f36.chunk.css",
-  "main.js": "./static/js/main.b37e3c97.chunk.js",
-  "main.js.map": "./static/js/main.b37e3c97.chunk.js.map",
-  "runtime~main.js": "./static/js/runtime~main.d653cc00.js",
-  "runtime~main.js.map": "./static/js/runtime~main.d653cc00.js.map",
-  "static/js/2.e93c9a48.chunk.js": "./static/js/2.e93c9a48.chunk.js",
-  "static/js/2.e93c9a48.chunk.js.map": "./static/js/2.e93c9a48.chunk.js.map",
-  "index.html": "./index.html",
-  "precache-manifest.b2e468d89beacb8cc5c743f4a78284f8.js": "./precache-manifest.b2e468d89beacb8cc5c743f4a78284f8.js",
-  "service-worker.js": "./service-worker.js",
-  "static/css/main.371e7f36.chunk.css.map": "./static/css/main.371e7f36.chunk.css.map",
-  "static/media/error-btn.svg": "./static/media/error-btn.9b30d5be.svg",
-  "static/media/loading-btn.svg": "./static/media/loading-btn.9650d3af.svg",
-  "static/media/pause-btn.svg": "./static/media/pause-btn.0403903f.svg",
-  "static/media/play-btn.svg": "./static/media/play-btn.4e85f443.svg"
+  "files": {
+    "main.css": "./static/css/main.df44feda.chunk.css",
+    "main.js": "./static/js/main.1766efed.chunk.js",
+    "main.js.map": "./static/js/main.1766efed.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.b5e850bb.js",
+    "runtime-main.js.map": "./static/js/runtime-main.b5e850bb.js.map",
+    "static/js/2.84303a81.chunk.js": "./static/js/2.84303a81.chunk.js",
+    "static/js/2.84303a81.chunk.js.map": "./static/js/2.84303a81.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.8c5971591e272a595978d3abfce1636a.js": "./precache-manifest.8c5971591e272a595978d3abfce1636a.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/main.df44feda.chunk.css.map": "./static/css/main.df44feda.chunk.css.map",
+    "static/media/error-btn.svg": "./static/media/error-btn.9b30d5be.svg",
+    "static/media/loading-btn.svg": "./static/media/loading-btn.9650d3af.svg",
+    "static/media/pause-btn.svg": "./static/media/pause-btn.0403903f.svg",
+    "static/media/play-btn.svg": "./static/media/play-btn.4e85f443.svg"
+  }
 }
