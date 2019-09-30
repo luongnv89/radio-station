@@ -1,58 +1,74 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { Component } from 'react';
-import './index.css';
-import AudioPlayer from './AudioPlayer';
-import MediaInfo from './MediaInfo';
-import MediaList from './MediaList';
+import React, { useState, useEffect } from "react";
+import "./index.css";
+import AudioPlayer from "./AudioPlayer";
+import MediaInfo from "./MediaInfo";
+import MediaList from "./MediaList";
+const { setHashValue } = require('../../utils');
 
-class RadioPlayer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentChannelIndex: props.defaultChannelIndex,
-      showList: false,
-    };
+const RadioPlayer = props => {
+  const [showList, setShowList] = useState(false);
+  const [currentChannelIndex, setCurrentChannelIndex] = useState(0);
+  const { listChannels, theme } = props;
+  let apTheme = theme ? theme : "dark";
+  let oldBodyClassName = document.body.getAttribute("class")
+    ? document.body.getAttribute("class")
+    : "";
+  if (oldBodyClassName.indexOf(apTheme) === -1) {
+    oldBodyClassName = oldBodyClassName
+      .replace(" dark", "")
+      .replace(" light", "");
+    const newBodyClassName = oldBodyClassName + " " + apTheme;
+    document.body.setAttribute("class", newBodyClassName);
+  }
+  const currentChannel = listChannels[currentChannelIndex];
+  document.title = `Radio Station - ${currentChannel.name}`;
+  setHashValue(currentChannel.name);
 
-    this.selectChannel = this.selectChannel.bind(this);
-    this.handleShowListBtn = this.handleShowListBtn.bind(this);
+  useEffect(() => {
+    setCurrentChannelIndex(props.defaultChannelIndex);
+  }, [props.defaultChannelIndex]);
+
+  const selectChannel = index => {
+    setCurrentChannelIndex(index);
+    setShowList(false);
+  };
+
+  const handleShowListBtn = () => {
+    setShowList(!showList);
+  };
+  const handlePlayerError = () => {
+    console.error(`Cannot play the channel: ${currentChannel.name}`);
+    console.log('Going to try the next channel');
+    setCurrentChannelIndex(currentChannelIndex + 1);
+    // if (props.switchChannel) props.switchChannel(currentChannelIndex + 1);
   }
 
-  selectChannel(index) {
-    this.setState({ currentChannelIndex: index, showList: false });
-    if (this.props.switchChannel) this.props.switchChannel(index);
-  }
+  console.log('Going to play current channel: ', currentChannel.name);
 
-  handleShowListBtn() {
-    this.setState((prevState) => ({
-      showList: !prevState.showList,
-    }));
-  }
-
-  render() {
-    const { listChannels, theme } = this.props;
-    let apTheme = theme ? theme : 'dark';
-    let oldBodyClassName = document.body.getAttribute('class') ? document.body.getAttribute('class') : '';
-    if (oldBodyClassName.indexOf(apTheme) === -1) {
-      oldBodyClassName = oldBodyClassName.replace(' dark','').replace(' light','');
-      const newBodyClassName = oldBodyClassName + ' ' + apTheme;
-      document.body.setAttribute('class', newBodyClassName);
-    }
-    const currentChannel = listChannels[this.state.currentChannelIndex];
-    document.title = `Radio Station - ${currentChannel.name}`;
-    return (
-      <div className={`RadioPlayer ${apTheme}`}>
-        <div className="player-bar">
-          <AudioPlayer channel={currentChannel} />
-          <button className="show-list-btn" onClick={this.handleShowListBtn}>{this.state.showList ? 'Back' : 'Switch Channel'}</button>
-        </div>
-        {this.state.showList ? (<MediaList
-              listChannels={listChannels}
-              channel={currentChannel}
-              selectChannel={this.selectChannel}
-            />) : (<MediaInfo channel={currentChannel} />)}
+  return (
+    <div className={`RadioPlayer ${apTheme}`}>
+      <div className="player-bar">
+        <AudioPlayer
+          channel={currentChannel}
+          handlePlayerError={handlePlayerError}
+        />
+        <button className="show-list-btn" onClick={handleShowListBtn}>
+          {showList ? "Back" : "Switch Channel"}
+        </button>
       </div>
-    );
-  }
-}
+
+      {showList ? (
+        <MediaList
+          listChannels={listChannels}
+          channel={currentChannel}
+          selectChannel={selectChannel}
+        />
+      ) : (
+        <MediaInfo channel={currentChannel}/>
+      )}
+    </div>
+  );
+};
 
 export default RadioPlayer;

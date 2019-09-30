@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PlayButtonIcon from './svg/play-btn.svg';
 import PauseButtonIcon from './svg/pause-btn.svg';
 import LoadingButtonIcon from './svg/loading-btn.svg';
@@ -12,85 +12,42 @@ const ActionButtons = {
   error: ErrorButtonIcon,
 };
 
+const AudioPlayer = props => {
+  const [status, setStatus] = useState('loading');
 
-class AudioPlayer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      playerStatus: 'paused',
-      error: '',
-    };
+  let audioPlayer = null;
 
-    this.handlePlayButton = this.handlePlayButton.bind(this);
-    this._onPlay = this._onPlay.bind(this);
-    this._onPause = this._onPause.bind(this);
-    this._onError = this._onError.bind(this);
+  const _onPlay = () => {
+    setStatus('playing');
   }
 
-  componentDidMount() {
-    this.setState({
-      playerStatus: 'loading',
-    });
-    setTimeout(() => {
-      if (this.state.playerStatus === 'loading') {
-        this.setState({
-          playerStatus: 'paused',
-        });
-      }
-    }, 5000);
+  const _onPause = () => {
+    setStatus('paused');
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.channel !== this.props.channel) {
-      this.setState({
-        playerStatus: 'loading',
-      });
+  const _onError = (error) => {
+    // console.error('ERROR: ...: ',error);
+    props.handlePlayerError(error);
+  }
+
+  const handlePlayButton = () => {
+    console.log('handle playing button...', status);
+    if (status === 'playing') {
+      audioPlayer.pause();
+    } else if (status === 'paused') {
+      audioPlayer.play();
+      setStatus('loading');
     }
   }
 
-  _onPlay() {
-    this.setState({
-      playerStatus: 'playing',
-    });
-  }
+  console.log(status);
 
-  _onPause() {
-    this.setState({
-      playerStatus: 'paused',
-    });
-  }
-
-  _onError(error) {
-    console.error(error);
-    this.setState({
-      playerStatus: 'error',
-    });
-  }
-
-  handlePlayButton() {
-    if (this.state.playerStatus === 'playing') {
-      this.audioPlayer.pause();
-    } else if (this.state.playerStatus === 'paused') {
-      this.audioPlayer.play();
-      this.setState({
-        playerStatus: 'loading',
-      });
-    }
-  }
-
-  render() {
-    const { channel } = this.props;
-    const { playerStatus } = this.state;
-    const btnIcon = ActionButtons[playerStatus];
-
-    // TODO: handle audio player events by adding onEvent={this.onEvent}
-    return (
-      <div className="audio-player">
-        <audio src={channel.url[0]} controls ref={input => { this.audioPlayer = input; }} onPlay={this._onPlay} onPause={this._onPause} onError={this._onError} hidden autoPlay/>
-        <img className={`audio-player-btn ${playerStatus}`} src={btnIcon} onClick={this.handlePlayButton} alt="Click to play/pause the audio" />
+  return (
+    <div className="audio-player">
+        <audio src={props.channel.url[0]} controls ref={input => { audioPlayer = input; }} onPlay={_onPlay} onPause={_onPause} onError={_onError} hidden autoPlay/>
+        <img className={`audio-player-btn ${status}`} src={ActionButtons[status]} onClick={handlePlayButton} alt="Click to play/pause the audio" />
       </div>
-    );
-  }
+  )
 }
 
 export default AudioPlayer;

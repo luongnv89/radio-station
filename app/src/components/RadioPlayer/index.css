@@ -164,3 +164,7 @@ ul.ap-list-media {
   background-color: white;
   color: black;
 }
+
+.text-error{
+  color: red;
+}
